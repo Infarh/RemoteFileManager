@@ -120,5 +120,11 @@
     <Folder Include="Models\" />
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteFileManager.Interfaces\RemoteFileManager.Interfaces.csproj">
+      <Project>{ad9b7342-ce9e-4a71-a21e-a55adf9e81a4}</Project>
+      <Name>RemoteFileManager.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
