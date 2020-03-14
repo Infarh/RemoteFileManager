@@ -1,6 +1,6 @@
 ﻿using System;
-using System.ComponentModel.Design;
 using Microsoft.Extensions.DependencyInjection;
+using RemoteFileManager.ViewModels;
 
 namespace RemoteFileManager
 {
@@ -12,7 +12,7 @@ namespace RemoteFileManager
 
         private static IServiceCollection ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSingleton<MainWindowViewModel>();
 
             return services;
         }
