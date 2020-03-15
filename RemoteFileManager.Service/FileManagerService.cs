@@ -1,34 +1,79 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using RemoteFileManager.Interfaces.Services;
 
 namespace RemoteFileManager.Service
 {
     public class FileManagerService : IFileManagerService
     {
-        public IEnumerable<DriveInfo> GetRoots() => DriveInfo.GetDrives();
+        private static void Log([CallerMemberName] string MethodName = null) => Console.WriteLine("{0}()", MethodName);
 
-        public IEnumerable<DirectoryInfo> GetDirectories(string Path) => new DirectoryInfo(Path).EnumerateDirectories();
+        public IEnumerable<DriveInfo> GetRoots()
+        {
+            Log();
+            return DriveInfo.GetDrives();
+        }
 
-        public IEnumerable<FileInfo> GetFiles(string Path) => new DirectoryInfo(Path).EnumerateFiles();
+        public IEnumerable<DirectoryInfo> GetDirectories(string Path)
+        {
+            Log();
+            return new DirectoryInfo(Path).EnumerateDirectories();
+        }
 
-        public FileInfo GetFileInfo(string Path) => new FileInfo(Path);
+        public IEnumerable<FileInfo> GetFiles(string Path)
+        {
+            Log();
+            return new DirectoryInfo(Path).EnumerateFiles();
+        }
 
-        public DirectoryInfo GetDirectoryInfo(string Path) => new DirectoryInfo(Path);
+        public FileInfo GetFileInfo(string Path)
+        {
+            Log();
+            return new FileInfo(Path);
+        }
 
-        public void CopyFile(string Source, string Destination) => File.Copy(Source, Destination);
+        public DirectoryInfo GetDirectoryInfo(string Path)
+        {
+            Log();
+            return new DirectoryInfo(Path);
+        }
 
-        public void MoveFile(string Source, string Destination) => File.Move(Source, Destination);
+        public void CopyFile(string Source, string Destination)
+        {
+            Log();
+            File.Copy(Source, Destination);
+        }
 
-        public void DeleteFile(string Path) => File.Delete(Path);
+        public void MoveFile(string Source, string Destination)
+        {
+            Log();
+            File.Move(Source, Destination);
+        }
 
-        public DirectoryInfo CreateDirectory(string Path) => Directory.CreateDirectory(Path);
+        public void DeleteFile(string Path)
+        {
+            Log();
+            File.Delete(Path);
+        }
 
-        public void DeleteDirectory(string Path) => Directory.Delete(Path, true);
+        public DirectoryInfo CreateDirectory(string Path)
+        {
+            Log();
+            return Directory.CreateDirectory(Path);
+        }
+
+        public void DeleteDirectory(string Path)
+        {
+            Log();
+            Directory.Delete(Path, true);
+        }
 
         public int Execute(string Path, string Arguments, bool ShellExecute)
         {
+            Log();
             var info = new ProcessStartInfo(Path, Arguments) { UseShellExecute = ShellExecute };
             var process = Process.Start(info);
             return process.Id;
