@@ -4,5 +4,7 @@ namespace RemoteFileManager.Services
 {
     class FileServerWCF : IFileServer
     {
+        
+
     }
 }

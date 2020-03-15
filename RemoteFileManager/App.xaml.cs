@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using RemoteFileManager.Services;
+using RemoteFileManager.Services.Interfaces;
 using RemoteFileManager.ViewModels;
 
 namespace RemoteFileManager
@@ -13,6 +15,7 @@ namespace RemoteFileManager
         private static IServiceCollection ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<IFileServer, FileServerWCF>();
 
             return services;
         }

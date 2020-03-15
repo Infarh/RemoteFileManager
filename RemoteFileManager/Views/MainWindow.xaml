@@ -16,8 +16,48 @@
                 <TextBlock Text="{Binding Status}"/>
             </StatusBarItem>
         </StatusBar>
-        <Grid>
-
-        </Grid>
+        <DockPanel>
+            <GroupBox Header="Адрес" DockPanel.Dock="Top">
+                <TextBox Text="{Binding Address}"/>
+            </GroupBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Grid.Column="0" Header="Диски">
+                    <DockPanel>
+                        <Button DockPanel.Dock="Top" Content="Обновить" Command="{Binding GetDrivesCommand}"/>
+                        <ListBox ItemsSource="{Binding Drives}" SelectedItem="{Binding SelectedDrive}"/>
+                    </DockPanel>
+                </GroupBox>
+                <GroupBox Grid.Column="1" Header="{Binding SelectedDirectory.FullName}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Grid.Row="0" Header="Поддиректории">
+                            <DockPanel>
+                                <UniformGrid DockPanel.Dock="Top" Rows="1">
+                                    <Button Content="Вверх" Command="{Binding GoToParentDirectoryCommand}" CommandParameter="{Binding SelectedDirectory}"/>
+                                    <Button Content="Удалить"/>
+                                </UniformGrid>
+                                <ListBox ItemsSource="{Binding SubDirectories}" SelectedItem="{Binding SelectedDirectory}"/>
+                            </DockPanel>
+                        </GroupBox>
+                        <GroupBox Grid.Row="1" Header="Файлы">
+                            <DockPanel>
+                                <UniformGrid DockPanel.Dock="Bottom" Rows="1">
+                                    <Button Content="Выполнить"/>
+                                    <Button Content="Удалить"/>
+                                </UniformGrid>
+                                <ListBox ItemsSource="{Binding Files}"/>
+                            </DockPanel>
+                        </GroupBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </DockPanel>
     </DockPanel>
 </Window>
